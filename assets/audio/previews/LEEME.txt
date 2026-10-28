@@ -1,0 +1,6 @@
+Adelantos de audio (opcional)
+Pon aquí MP3 cortos (15–30 s, idealmente < 500 KB) con el nombre de la canción:
+  no-debiste-amarme.mp3, selva-con-wifi.mp3, frontera-y-humo.mp3, mariangela.mp3, cache.mp3
+Luego, en assets/js/data.js, escribe la ruta en el campo "preview" de cada canción:
+  preview: 'assets/audio/previews/selva-con-wifi.mp3',
+Mientras esté vacío, al pasar el cursor suena una marimba sintetizada.

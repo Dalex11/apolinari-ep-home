@@ -1,14 +1,17 @@
 # APOLINARI EP · Sitio web
 
 Sitio estático (HTML + CSS + JS, sin compilación) para GitHub Pages.
-URL: https://apolinari-ep.github.io/home/
+URL: https://apolinari.com/
 
 ## Publicar
 1. Sube **todo el contenido de esta carpeta** (no la carpeta en sí) a la raíz del repositorio `apolinari-ep/home`, incluido el archivo oculto `.nojekyll`.
 2. En GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main` / `(root)` → Save**.
-3. En 1–2 minutos estará en https://apolinari-ep.github.io/home/
+3. En **Settings → Pages → Custom domain** escribe `apolinari.com`, guarda y, cuando el DNS valide, activa **Enforce HTTPS**. El archivo `CNAME` de esta carpeta ya trae el dominio.
+4. En el proveedor del dominio crea estos registros DNS:
+   - 4 registros `A` para `@`: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - 1 registro `CNAME` para `www` → `apolinari-ep.github.io`
 
-> Si algún día cambias el nombre del repositorio, actualiza `/home/` en `404.html` (atributo `data-root` y rutas) y la URL en `assets/js/data.js`, `sitemap.xml` y `robots.txt`.
+> El sitio vive en la raíz del dominio. Si algún día cambia el dominio, actualiza `CNAME`, la URL en `assets/js/data.js`, `sitemap.xml`, `robots.txt` y las etiquetas `canonical`/`og:` de cada `.html`.
 
 ## Editar contenido
 Casi todo se edita en **`assets/js/data.js`**: canciones, enlaces, historias, curiosidades, ficha técnica, créditos, artistas, equipo, shows y merch.

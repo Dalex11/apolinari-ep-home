@@ -276,7 +276,6 @@
     <div class="grain" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"></div>
     <div class="nav-progress" aria-hidden="true"></div>
-    <div class="cursor" aria-hidden="true"><span></span></div><div class="cursor-dot" aria-hidden="true"></div>
     <div class="toasts" role="status" aria-live="polite"></div>
     <button class="to-top" data-action="top" aria-label="${t('footer.top')}">
       <svg viewBox="0 0 52 52" style="position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="var(--yellow)" stroke-width="2" stroke-dasharray="150.8" stroke-dashoffset="150.8"/></svg>${I.arrowUp}</button>
@@ -618,25 +617,6 @@
     });
   }
 
-  /* Cursor personalizado */
-  function initCursor() {
-    if (!FINE || REDUCED) return;
-    body.classList.add('has-cursor');
-    const c = $('.cursor'), d = $('.cursor-dot'), lbl = $('span', c);
-    let x = -100, y = -100, cx = x, cy = y;
-    window.addEventListener('mousemove', e => { x = e.clientX; y = e.clientY; d.style.transform = `translate3d(${x}px,${y}px,0)`; }, { passive: true });
-    (function loop() { cx += (x - cx) * .18; cy += (y - cy) * .18; c.style.transform = `translate3d(${cx}px,${cy}px,0)`; requestAnimationFrame(loop); })();
-    document.addEventListener('mouseover', e => {
-      const l = e.target.closest('[data-cursor]'), a = e.target.closest('a,button,summary,label,[role="option"]');
-      c.classList.toggle('is-label', !!l); lbl.textContent = l ? l.dataset.cursor : '';
-      c.classList.toggle('is-link', !l && !!a);
-    });
-    document.addEventListener('mousedown', () => c.classList.add('is-down'));
-    document.addEventListener('mouseup', () => c.classList.remove('is-down'));
-    document.addEventListener('mouseleave', () => { c.style.opacity = d.style.opacity = 0; });
-    document.addEventListener('mouseenter', () => { c.style.opacity = d.style.opacity = 1; });
-  }
-
   /* Header que se oculta, barra de progreso, volver arriba */
   function initScrollUI() {
     const hd = $('#site-header'), sp = $('.scroll-progress'), top = $('.to-top'), ring = $('.to-top circle');
@@ -844,7 +824,6 @@
     renderChrome();
     renderMain();
     initScroll();
-    initCursor();
     initScrollUI();
     const firstHome = PAGE === 'home' && !store.sget('loaded');
     if (firstHome && hasGSAP && window.Pages.home.loader) {

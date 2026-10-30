@@ -6,12 +6,30 @@
    - Un campo vacío ('' o []) se muestra como "Por confirmar" o se oculta.
    - Fechas en formato AAAA-MM-DD. Cuenta regresiva en hora de Colombia (-05:00).
    ========================================================================= */
+/* Créditos que se repiten en todas las canciones estrenadas */
+const PRODUCERS = ['Error 404', 'East Coast', 'Calipsis Music', 'Ospina Records'];
+const videoCredits = locations => ({
+  director: 'Camilo Medina',
+  visual: ['Calipsis Music', 'Ospina Records'],
+  music: 'Brooklyn Records',
+  lights: ['Juan Valens', 'Sebastián González'],
+  locations
+});
+const CREW = [
+  { who: 'mg-music', role: { es: 'Sello', en: 'Label' } },
+  { who: 'calipsis-music', role: { es: 'Producción y producción visual', en: 'Production & visual production' } },
+  { who: 'ospina-records', role: { es: 'Producción y producción visual', en: 'Production & visual production' } },
+  { who: 'camilo-medina', role: { es: 'Dirección del video', en: 'Video director' } },
+  { who: 'juan-valens', role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' } },
+  { who: 'sebastian-gonzalez', role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' } }
+];
+
 window.APOLINARI = {
 
   site: {
     name: 'APOLINARI',
     tagline: 'East Coast x Error 404',
-    baseUrl: 'https://apolinari-ep.github.io/home/',
+    baseUrl: 'https://apolinari.com/',
     label: 'MG Music',
     owner: 'Deiby Rodriguez',
     email: 'deiby.rodriguez.rodallega@gmail.com',
@@ -30,7 +48,7 @@ window.APOLINARI = {
     youtubePlaylist: 'https://www.youtube.com/watch?v=ufOvZre9Xxs&list=PLOEs_yB11W8f4d0qyohlgyZodZRMvIZF4',
     youtubePlaylistId: 'PLOEs_yB11W8f4d0qyohlgyZodZRMvIZF4',
     presskit: 'assets/press/apolinari-ep-press-kit.pdf',
-    presskitSize: '5,1 MB',
+    presskitSize: '5 MB',
     photos: 'assets/press/apolinari-ep-fotos.zip',
     photosSize: '5,5 MB',
     description: {
@@ -57,14 +75,13 @@ window.APOLINARI = {
 
   /* ---------------------------------------------------------------------
      CANCIONES
-     - preview: ruta a un MP3 corto (15–30 s) para el sonido al pasar el
-       cursor. Ej: 'assets/audio/previews/no-debiste-amarme.mp3'.
-       Mientras esté vacío, suena una marimba sintetizada.
      - countdown: solo para capítulos sin estrenar (hora Colombia).
-     - credits: qué hizo cada integrante del equipo en la canción. Ej:
-       credits: [{ who: 'camilo-medina', role: { es: 'Dirección', en: 'Director' } }]
+     - featuring: ids de artistas invitados (están en "team", grupo 'guests').
+     - meta / video: un texto o una lista de nombres. Si el nombre coincide
+       con un artista o alguien del equipo, se enlaza a su página.
+     - credits: qué hizo cada integrante del equipo en la canción
        ('who' es el id del equipo; así aparece en su página automáticamente).
-     - trivia: [{ es: '...', en: '...' }, ...]  · story: textos separados por línea en blanco.
+     - trivia: [{ es: '...', en: '...' }, ...]  · story: párrafos separados por \n\n.
      --------------------------------------------------------------------- */
   songs: [
     {
@@ -76,13 +93,22 @@ window.APOLINARI = {
       spotify: 'https://open.spotify.com/track/4FLqH8mJ7kphDMrRQzL2Gw', spotifyId: '4FLqH8mJ7kphDMrRQzL2Gw',
       apple: 'https://music.apple.com/mx/song/no-debiste-amarme/1880105556',
       youtube: 'https://youtu.be/ufOvZre9Xxs', youtubeId: 'ufOvZre9Xxs',
-      preview: '',
-      story: { es: '', en: '' },
-      seriesSummary: { es: '', en: '' },
-      trivia: [],
-      meta: { composers: '', producers: '', mixing: '', mastering: '', bpm: '', key: '', isrc: '', label: 'MG Music', recorded: '' },
-      video: { director: '', camera: '', production: '', locations: '' },
-      credits: []
+      story: {
+        es: 'No debiste amarme abre la historia de Apolinari justo donde más duele: al otro lado de una ruptura. El protagonista todavía tiene la herida abierta, y cada verso es un reclamo, una mezcla de rabia y tristeza dirigida a alguien que ya no está.\n\nPero debajo del reproche hay algo más incómodo: las ganas de volver. Sabe que esa relación no le hace bien y, aun así, busca excusas, promesas y atajos para recuperarla. Es el duelo en su fase de negociación, ese momento en el que uno está dispuesto a ceder lo que sea con tal de que nada haya cambiado.\n\nSobre una base de cumbia urbana, la canción convierte el despecho en algo que se baila, porque en Cali hasta la tusa se sufre al ritmo de la música.',
+        en: 'No debiste amarme (“You shouldn’t have loved me”) opens the story of Apolinari right where it hurts most: on the other side of a breakup. The protagonist’s wound is still open, and every line is a reproach, a mix of anger and sadness aimed at someone who is no longer there.\n\nBut beneath the blame lies something more uncomfortable: he still wants to go back. He knows that relationship isn’t good for him, yet he keeps looking for excuses, promises and shortcuts to win it back. It’s grief in its bargaining stage, the moment when you’d give up anything as long as nothing had changed.\n\nOver an urban cumbia beat, the song turns heartbreak into something you can dance to, because in Cali even heartache moves to the rhythm of the music.'
+      },
+      seriesSummary: {
+        es: 'El dolor. La ruptura acaba de pasar y el protagonista está en carne viva: reclama, sufre y, aunque sabe que no le conviene, negocia consigo mismo para volver.',
+        en: 'The pain. The breakup has just happened and the protagonist is raw: he blames, he suffers and, even knowing it’s not good for him, he bargains with himself to go back.'
+      },
+      trivia: [
+        { es: 'La letra nace de poemas que Error 404 escribió cuando empezó a estudiar poesía, en plena tusa.', en: 'The lyrics come from poems Error 404 wrote when he started studying poetry, right in the middle of a heartbreak.' },
+        { es: 'En pleno rodaje llegó la policía. La grabación se pausó mientras el equipo explicaba que no estaban haciendo nada malo, y eso retrasó la jornada.', en: 'The police showed up in the middle of the shoot. Filming stopped while the crew explained they weren’t doing anything wrong, which set the day back a bit.' },
+        { es: 'Se grabó en Dapa, en las montañas del Valle del Cauca.', en: 'It was recorded in Dapa, in the mountains of Valle del Cauca.' }
+      ],
+      meta: { composers: ['Error 404', 'East Coast'], producers: PRODUCERS, mixing: 'East Coast', mastering: 'East Coast', label: 'MG Music', recorded: 'Dapa, Valle del Cauca' },
+      video: videoCredits('Dapa, Valle del Cauca'),
+      credits: CREW
     },
     {
       id: 'selva-con-wifi', n: 2,
@@ -93,47 +119,74 @@ window.APOLINARI = {
       spotify: 'https://open.spotify.com/track/7ors6X36GhgyrCL2km4n9S', spotifyId: '7ors6X36GhgyrCL2km4n9S',
       apple: 'https://music.apple.com/mx/song/selva-con-wifi/1891154824',
       youtube: 'https://youtu.be/OvG079b6D48', youtubeId: 'OvG079b6D48',
-      preview: '',
-      story: { es: '', en: '' },
-      seriesSummary: { es: '', en: '' },
-      trivia: [],
-      meta: { composers: '', producers: '', mixing: '', mastering: '', bpm: '', key: '', isrc: '', label: 'MG Music', recorded: '' },
-      video: { director: '', camera: '', production: '', locations: '' },
-      credits: []
+      story: {
+        es: 'En el segundo capítulo la historia se escapa de la realidad. Selva con wifi construye un mundo inventado donde la naturaleza y la tecnología dejaron de ser opuestas: los árboles transmiten señal, los ríos corren como datos y la vida silvestre convive con pantallas y cables. Una selva digital.\n\nToda la letra es un juego de alusiones entre esos dos universos. El amor, el deseo y la memoria se cuentan con palabras de ambos lados: lo que florece y lo que se descarga, lo que echa raíz y lo que se conecta.\n\nEs el capítulo más experimental del EP: el currulao del Pacífico se cruza con el dembow para sonar como ese mismo mundo, orgánico y eléctrico a la vez.',
+        en: 'In the second chapter, the story escapes reality. Selva con wifi (“Jungle with wifi”) builds an invented world where nature and technology are no longer opposites: trees broadcast signal, rivers flow like data and wildlife lives alongside screens and cables. A digital jungle.\n\nThe whole song is a game of allusions between those two universes. Love, desire and memory are told with words from both sides: what blooms and what downloads, what takes root and what connects.\n\nIt’s the most experimental chapter of the EP: Pacific currulao meets dembow to sound like that very world, organic and electric at the same time.'
+      },
+      seriesSummary: {
+        es: 'La evasión. Para no sentir, el protagonista se refugia en un mundo inventado, una selva digital donde la naturaleza y la tecnología se mezclan. Una forma de escapar de lo que le duele.',
+        en: 'The escape. To avoid feeling, the protagonist takes refuge in an invented world, a digital jungle where nature and technology blend. A way to run from what hurts.'
+      },
+      trivia: [
+        { es: 'Error 404 la escribió pensando en las muchas similitudes que hay entre la naturaleza y la tecnología.', en: 'Error 404 wrote it thinking about the many similarities between nature and technology.' },
+        { es: 'Es la canción más experimental del EP: el dúo quería mostrar su lado más arriesgado.', en: 'It’s the most experimental song on the EP: the duo wanted to show their boldest side.' },
+        { es: 'Todo se grabó en La Cumbre, Valle del Cauca, el municipio donde vive Error 404.', en: 'Everything was recorded in La Cumbre, Valle del Cauca, the town where Error 404 lives.' }
+      ],
+      meta: { composers: ['Error 404', 'East Coast'], producers: PRODUCERS, mixing: 'East Coast', mastering: 'East Coast', label: 'MG Music', recorded: 'La Cumbre, Valle del Cauca' },
+      video: videoCredits('La Cumbre, Valle del Cauca'),
+      credits: CREW
     },
     {
       id: 'frontera-y-humo', n: 3,
       title: 'Frontera y humo',
       duration: '3:40', release: '2026-04-30',
       genre: { es: 'Lo-fi / Reggaetón', en: 'Lo-fi / Reggaetón' },
-      artists: ['east-coast', 'error-404'], featuring: ['Santi Jara'],
+      artists: ['east-coast', 'error-404'], featuring: ['santi-jara'],
       spotify: 'https://open.spotify.com/track/1wVApj7DrJszp0xuEoHz9K', spotifyId: '1wVApj7DrJszp0xuEoHz9K',
       apple: 'https://music.apple.com/mx/song/frontera-y-humo/1893476093',
       youtube: 'https://youtu.be/K1n1patgxFo', youtubeId: 'K1n1patgxFo',
-      preview: '',
-      story: { es: '', en: '' },
-      seriesSummary: { es: '', en: '' },
-      trivia: [],
-      meta: { composers: '', producers: '', mixing: '', mastering: '', bpm: '', key: '', isrc: '', label: 'MG Music', recorded: '' },
-      video: { director: '', camera: '', production: '', locations: '' },
-      credits: []
+      story: {
+        es: 'Frontera y humo muestra otra cara del protagonista: encantador, coqueto hasta el extremo, con conversación para muchas y compromiso con ninguna. Por fuera parece que la está pasando bien; por dentro, sigue sin superar lo que vivió.\n\nNo busca enamorarse porque todavía carga con sus relaciones pasadas, así que prefiere moverse en esa frontera entre el juego y el afecto, donde nada se queda el tiempo suficiente como para doler. Todo se vuelve humo: llega, envuelve y desaparece.\n\nCon la voz invitada de Santi Jara, la canción se apoya en una base lo-fi y reggaetón, relajada y nocturna, perfecta para ese estado en el que uno coquetea con todo el mundo para no tener que mirarse a sí mismo.',
+        en: 'Frontera y humo (“Border and smoke”) shows another side of the protagonist: charming, flirtatious to the extreme, with a line for everyone and commitment to no one. On the outside he seems to be having a great time; inside, he still hasn’t gotten over what he went through.\n\nHe isn’t looking to fall in love because he still carries his past relationships, so he lives on that border between play and affection, where nothing stays long enough to hurt. Everything turns to smoke: it arrives, wraps around you and disappears.\n\nFeaturing Santi Jara, the song rides a laid-back, late-night lo-fi and reggaetón beat, perfect for that state where you flirt with everyone so you don’t have to look at yourself.'
+      },
+      seriesSummary: {
+        es: 'Llenar el vacío. Intenta tapar el hueco con muchas personas a la vez. Coquetea con todas, no se compromete con ninguna y, sin darse cuenta, termina lastimando a varias.',
+        en: 'Filling the void. He tries to fill the hole with many people at once. He flirts with all of them, commits to none and, without realizing it, ends up hurting several.'
+      },
+      trivia: [
+        { es: 'El video se grabó en Macroviajes, que además fue patrocinador del video.', en: 'The video was shot at Macroviajes, which also sponsored it.' },
+        { es: 'Santi Jara cambió el coro original para darle más fuerza y hacerlo más pegajoso.', en: 'Santi Jara rewrote the original chorus to give it more punch and make it catchier.' }
+      ],
+      meta: { composers: ['Error 404', 'East Coast'], producers: PRODUCERS, mixing: 'East Coast', mastering: 'East Coast', label: 'MG Music', recorded: 'Cali, Valle del Cauca' },
+      video: videoCredits('Macroviajes · Cali, Valle del Cauca'),
+      credits: CREW.concat({ who: 'santi-jara', role: { es: 'Artista invitado', en: 'Featured artist' } })
     },
     {
       id: 'mariangela', n: 4,
       title: 'Mariangela',
       duration: '3:21', release: '2026-05-31',
       genre: { es: 'R&B / Reggaetón', en: 'R&B / Reggaetón' },
-      artists: ['east-coast', 'error-404'], featuring: ['Yomiel'],
+      artists: ['east-coast', 'error-404'], featuring: ['yomiel'],
       spotify: 'https://open.spotify.com/track/3w5bUCNv6mHOlpTfC4nqrd', spotifyId: '3w5bUCNv6mHOlpTfC4nqrd',
       apple: 'https://music.apple.com/mx/song/mariangela/6772600576',
       youtube: 'https://youtu.be/GbkDZnzAHSA', youtubeId: 'GbkDZnzAHSA',
-      preview: '',
-      story: { es: '', en: '' },
-      seriesSummary: { es: '', en: '' },
-      trivia: [],
-      meta: { composers: '', producers: '', mixing: '', mastering: '', bpm: '', key: '', isrc: '', label: 'MG Music', recorded: '' },
-      video: { director: '', camera: '', production: '', locations: '' },
-      credits: []
+      story: {
+        es: 'En Mariangela algo cambia. El protagonista conoce a una mujer rumbera, de esas que se adueñan de la pista, y por primera vez en mucho tiempo alguien le mueve el piso de verdad.\n\nLa letra está llena de referencias a la música: canciones, géneros y ritmos aparecen como piezas de un mismo coqueteo, porque es la música la que los conecta y la que marca el compás de cómo se conocen.\n\nEs la primera colaboración internacional del EP: el puertorriqueño Yomiel se suma desde el R&B y el reggaetón, y la canción junta en una misma noche al Caribe con la rumba caleña.',
+        en: 'In Mariangela, something changes. The protagonist meets a party girl, the kind who owns the dance floor, and for the first time in a long while someone truly sweeps him off his feet.\n\nThe lyrics are full of music references: songs, genres and rhythms show up as pieces of the same flirtation, because music is what connects them and sets the beat of how they get to know each other.\n\nIt’s the EP’s first international collaboration: Puerto Rico’s Yomiel joins in from R&B and reggaetón, bringing the Caribbean and Cali’s nightlife together in a single night.'
+      },
+      seriesSummary: {
+        es: 'Volver a sentir. Aparece alguien que le mueve el piso. Una mujer rumbera le recuerda que todavía puede ilusionarse, y por primera vez está dispuesto a intentarlo otra vez, siendo mejor.',
+        en: 'Feeling again. Someone sweeps him off his feet. A party girl reminds him he can still get his hopes up, and for the first time he’s willing to try again, and to be better.'
+      },
+      trivia: [
+        { es: 'Es la primera colaboración internacional del EP, junto al puertorriqueño Yomiel.', en: 'It’s the EP’s first international collaboration, with Puerto Rico’s Yomiel.' },
+        { es: 'El video se grabó en La Esquina Caliente Salsoteca, en Cali.', en: 'The video was shot at La Esquina Caliente Salsoteca, in Cali.' },
+        { es: 'Para el rodaje invitaron a escucharla, bailar y parchar a los artistas amigos de East Coast: son los que aparecen al fondo del video.', en: 'East Coast’s artist friends were invited to the shoot to listen, dance and hang out: they’re the ones in the background of the video.' },
+        { es: 'Es la única canción del EP compuesta solo por East Coast.', en: 'It’s the only song on the EP written by East Coast alone.' }
+      ],
+      meta: { composers: ['East Coast'], producers: PRODUCERS, mixing: 'East Coast', mastering: 'East Coast', label: 'MG Music', recorded: 'La Esquina Caliente Salsoteca, Cali' },
+      video: videoCredits('La Esquina Caliente Salsoteca, Cali'),
+      credits: CREW.concat({ who: 'yomiel', role: { es: 'Artista invitado', en: 'Featured artist' } })
     },
     {
       id: 'cache', n: 5,
@@ -144,14 +197,23 @@ window.APOLINARI = {
       spotify: 'https://open.spotify.com/track/1u3uzTFkPWXjlbcPbS3IMv', spotifyId: '1u3uzTFkPWXjlbcPbS3IMv',
       apple: 'https://music.apple.com/mx/song/cache/6779404161',
       youtube: 'https://youtu.be/7xfaUCgFUnM', youtubeId: '7xfaUCgFUnM',
-      preview: '',
-      story: { es: '', en: '' },
-      seriesSummary: { es: '', en: '' },
-      trivia: [],
-      meta: { composers: '', producers: '', mixing: '', mastering: '', bpm: '', key: '', isrc: '', label: 'MG Music', recorded: '' },
-      video: { director: '', camera: '', production: '', locations: '' },
-      credits: []
+      story: {
+        es: 'Cache encuentra al protagonista en su mejor momento. Ya no persigue a nadie ni huye de nada: está tranquilo, rodeado de sus amigos y disfrutando de todo lo que ha construido.\n\nEs una canción de celebración. Los lujos, el éxito, el parche y la buena vida aparecen como la recompensa de haber atravesado el duelo. El protagonista por fin se siente completo, con el caché de alguien que sabe lo que vale.\n\nSobre una cumbia urbana luminosa, Cache suena a final feliz. Pero a Apolinari todavía le quedan dos capítulos por contar.',
+        en: 'Cache finds the protagonist at his best. He’s no longer chasing anyone or running from anything: he’s at peace, surrounded by his friends and enjoying everything he has built.\n\nIt’s a celebration song. Luxury, success, good friends and the good life come as the reward for getting through the grief. The protagonist finally feels whole, with the swagger of someone who knows his worth.\n\nOver a bright urban cumbia, Cache sounds like a happy ending. But Apolinari still has two chapters left to tell.'
+      },
+      seriesSummary: {
+        es: 'La plenitud. Recuperado, rodeado de amigos y con la vida que soñó, el protagonista se siente completo. Parece el final feliz… ¿o no?',
+        en: 'Fulfillment. Healed, surrounded by friends and living the life he dreamed of, the protagonist feels whole. It looks like a happy ending… or does it?'
+      },
+      trivia: [
+        { es: 'Es el video más sencillo del EP hasta la fecha.', en: 'It’s the simplest video on the EP so far.' },
+        { es: 'La idea era grabar un parche con los amigos tal y como es normalmente, sin adornos.', en: 'The idea was to film a hangout with friends exactly as it usually goes, nothing staged.' }
+      ],
+      meta: { composers: ['Error 404', 'East Coast'], producers: PRODUCERS, mixing: 'East Coast', mastering: 'East Coast', label: 'MG Music', recorded: 'Cali, Valle del Cauca' },
+      video: videoCredits('Cali, Valle del Cauca'),
+      credits: CREW
     },
+    /* Capítulos 6 y 7: toda la información es anónima hasta el estreno */
     {
       id: 'capitulo-6', n: 6,
       title: '', /* Cuando tenga nombre, escríbelo aquí */
@@ -160,9 +222,9 @@ window.APOLINARI = {
       genre: { es: '', en: '' },
       artists: ['east-coast', 'error-404'], featuring: [],
       spotify: '', spotifyId: '', apple: '', youtube: '', youtubeId: '',
-      preview: '', story: { es: '', en: '' }, seriesSummary: { es: '', en: '' }, trivia: [],
-      meta: { composers: '', producers: '', mixing: '', mastering: '', bpm: '', key: '', isrc: '', label: 'MG Music', recorded: '' },
-      video: { director: '', camera: '', production: '', locations: '' },
+      story: { es: '', en: '' }, seriesSummary: { es: '', en: '' }, trivia: [],
+      meta: { composers: '', producers: '', mixing: '', mastering: '', label: 'MG Music', recorded: '' },
+      video: { director: '', visual: '', music: '', lights: '', locations: '' },
       credits: []
     },
     {
@@ -170,15 +232,16 @@ window.APOLINARI = {
       title: '',
       countdown: '2026-12-18T00:00:00-05:00',
       duration: '', release: '',
-      genre: { es: 'Rock / Reggaetón', en: 'Rock / Reggaetón' },
+      genre: { es: '', en: '' },
       artists: ['east-coast', 'error-404'], featuring: [],
       spotify: '', spotifyId: '', apple: '', youtube: '', youtubeId: '',
-      preview: '', story: { es: '', en: '' }, seriesSummary: { es: '', en: '' }, trivia: [],
-      meta: { composers: '', producers: '', mixing: '', mastering: '', bpm: '', key: '', isrc: '', label: 'MG Music', recorded: '' },
-      video: { director: '', camera: '', production: '', locations: '' },
+      story: { es: '', en: '' }, seriesSummary: { es: '', en: '' }, trivia: [],
+      meta: { composers: '', producers: '', mixing: '', mastering: '', label: 'MG Music', recorded: '' },
+      video: { director: '', visual: '', music: '', lights: '', locations: '' },
       credits: []
     }
   ],
+
 
   /* --------------------------------------------------------------------- */
   artists: {
@@ -223,7 +286,7 @@ window.APOLINARI = {
       name: 'Error 404',
       aka: 'Error 404',
       realName: 'Deiby Alexander Rodríguez Rodallega',
-      born: '', /* No aparece en el PDF: AAAA-MM-DD */
+      born: '2001-11-11',
       city: 'Cali, Colombia',
       role: { es: 'Artista y productor', en: 'Artist & producer' },
       instagram: 'personnofound',
@@ -264,10 +327,23 @@ window.APOLINARI = {
       role: { es: 'Producción visual', en: 'Visual production' }, instagram: 'ospinarecords_', img: 'team/ospina-records' },
     { id: 'camilo-medina', name: 'Camilo Medina', type: 'person', group: 'direction',
       role: { es: 'Dirección', en: 'Director' }, instagram: 'iamdelta_', img: 'team/camilo-medina' },
-    { id: 'juan-valens', name: 'Juan Valens', type: 'person', group: 'direction',
-      role: { es: 'Asistente de dirección', en: 'Assistant director' }, instagram: 'juan_valens', img: 'team/juan-valens' },
-    { id: 'sebastian-gonzalez', name: 'Sebastián González', type: 'person', group: 'direction',
-      role: { es: 'Asistente de dirección', en: 'Assistant director' }, instagram: 'sb.rompiendo', img: 'team/sebastian-gonzalez' }
+    { id: 'juan-valens', name: 'Juan Valens', type: 'person', group: 'crew',
+      role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' }, instagram: 'juan_valens', img: 'team/juan-valens' },
+    { id: 'sebastian-gonzalez', name: 'Sebastián González', type: 'person', group: 'crew',
+      role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' }, instagram: 'sb.rompiendo', img: 'team/sebastian-gonzalez' },
+    /* Artistas invitados. Sin 'img' se mostraría un monograma con su 'color'. */
+    { id: 'santi-jara', name: 'Santi Jara', type: 'person', group: 'guests', color: '#7b2fd0',
+      role: { es: 'Artista invitado', en: 'Featured artist' }, instagram: 'santi__jara', img: 'team/santi-jara',
+      bio: {
+        es: 'Artista caleño de música urbana que hace canciones con mucho amor y calidad. Sus letras giran principalmente alrededor del despecho, y su identidad visual es muy clara: el morado es su color.',
+        en: 'An urban music artist from Cali who makes songs with a lot of love and care. His lyrics revolve mostly around heartbreak, and his visual identity is unmistakable: purple is his color.'
+      } },
+    { id: 'yomiel', name: 'Yomiel', type: 'person', group: 'guests', color: '#2f4ff0',
+      role: { es: 'Artista invitado', en: 'Featured artist' }, instagram: 'yohoneypr', img: 'team/yomiel',
+      bio: {
+        es: 'Artista puertorriqueño de música urbana. Su participación en Mariangela convirtió la canción en la primera colaboración internacional de Apolinari.',
+        en: 'A Puerto Rican urban music artist. His feature on Mariangela made it Apolinari’s first international collaboration.'
+      } }
   ],
 
   /* Registro fotográfico (galería) */

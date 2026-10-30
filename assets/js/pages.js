@@ -15,7 +15,16 @@
   const ig = h => `https://instagram.com/${h}`;
   const artistsLine = (s, linked = true) => {
     const main = s.artists.map(id => { const a = D.artists[id]; return linked ? `<a href="${artistHref(id)}">${esc(a.name)}</a>` : esc(a.name); });
-    return main.concat(s.featuring.map(esc)).join(' x ');
+    const feat = s.featuring.map(id => { const m = D.team.find(x => x.id === id); return !m ? esc(id) : linked ? `<a href="${teamHref(id)}">${esc(m.name)}</a>` : esc(m.name); });
+    return main.concat(feat).join(' x ');
+  };
+  // Foto o logo; si no hay imagen, monograma con el color del artista
+  const avatar = (m, alt = '') => m.img ? `<img src="${img(m.img)}" alt="${esc(alt)}" loading="lazy">` :
+    `<span class="mono" style="--mono:${m.color || 'var(--yellow)'}" ${alt ? `role="img" aria-label="${esc(alt)}"` : 'aria-hidden="true"'}>${esc(m.name.split(/\s+/).map(w => w[0]).join('').slice(0, 2))}</span>`;
+  // Enlaza un nombre a la página del artista o del equipo, si existe
+  const linkName = name => {
+    const a = Object.values(D.artists).find(x => x.name === name), m = D.team.find(x => x.name === name);
+    return a ? `<a class="link-u" href="${artistHref(a.id)}">${esc(name)}</a>` : m ? `<a class="link-u" href="${teamHref(m.id)}">${esc(name)}</a>` : esc(name);
   };
   const listen = (s, cls = 'btn--ghost') => s.spotify ? `
       <a class="btn ${cls} platform platform--spotify" href="${s.spotify}" target="_blank" rel="noopener" data-magnetic>${I.spotify}Spotify</a>
@@ -168,7 +177,7 @@
       <section class="section section--tight" aria-labelledby="tm-t">
         <div class="wrap">
           <div class="section-head"><h2 class="section-title--elegant" id="tm-t" data-split>${t('home.teamTitle')}</h2><a class="link-u" href="${url('equipo.html')}">${t('seeAll')} ${I.arrow}</a></div>
-          <div class="team-grid">${D.team.map(m => `<a class="tm" href="${teamHref(m.id)}" data-reveal><span class="tm__img"><img src="${img(m.img)}" alt="" loading="lazy"></span><span><span class="tm__name">${esc(m.name)}</span><span class="tm__role" style="display:block">${esc(L(m.role))}</span></span><span class="tm__arrow">${I.arrowUR}</span></a>`).join('')}</div>
+          <div class="team-grid">${D.team.filter(m => m.group !== 'guests').map(m => `<a class="tm" href="${teamHref(m.id)}" data-reveal><span class="tm__img">${avatar(m)}</span><span><span class="tm__name">${esc(m.name)}</span><span class="tm__role" style="display:block">${esc(L(m.role))}</span></span><span class="tm__arrow">${I.arrowUR}</span></a>`).join('')}</div>
         </div>
       </section>
 
@@ -280,9 +289,10 @@
 
       if (!G) return;
       const ST = window.ScrollTrigger;
-      // Hero se encoge al hacer scroll
+      // Hero se encoge al hacer scroll. Se anima la sección (no la ventana) con valores
+      // explícitos: así no choca con la intro, que también anima la opacidad de [data-hero].
       const mm = G.matchMedia();
-      mm.add('(min-width: 1081px)', () => { G.to('[data-hero]', { scale: .9, borderRadius: 48, opacity: .4, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } }); });
+      mm.add('(min-width: 1081px)', () => { G.fromTo('.hero', { scale: 1, opacity: 1 }, { scale: .9, opacity: .4, ease: 'none', immediateRender: false, scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } }); });
       // Tracklist horizontal (escritorio)
       mm.add('(min-width: 861px)', () => {
         const track = $('.tl__track'), pin = $('.tl__pin');
@@ -365,9 +375,10 @@
   /* =======================================================================
      CANCIÓN
      ======================================================================= */
-  const FIELD_ORDER = ['composers', 'producers', 'mixing', 'mastering', 'bpm', 'key', 'isrc', 'label', 'recorded'];
-  const VIDEO_ORDER = ['director', 'camera', 'production', 'locations'];
-  const val = v => Array.isArray(v) ? v.join(', ') : (v && typeof v === 'object' ? L(v) : v);
+  const FIELD_ORDER = ['composers', 'producers', 'mixing', 'mastering', 'label', 'recorded'];
+  const VIDEO_ORDER = ['director', 'visual', 'music', 'lights', 'locations'];
+  // Devuelve HTML: los nombres conocidos quedan enlazados a su página
+  const val = v => Array.isArray(v) ? v.map(linkName).join(', ') : (v && typeof v === 'object' ? esc(L(v)) : v ? linkName(v) : '');
   const row = (k, v, raw) => `<div><dt>${t('song.fields.' + k)}</dt><dd class="${v ? '' : 'tbd'}">${v ? (raw ? v : esc(v)) : t('tbd')}</dd></div>`;
   Pages.song = {
     title: id => { const s = D.songs.find(x => x.id === id); return s ? `${songTitle(s)} · APOLINARI EP` : 'APOLINARI EP'; },
@@ -423,10 +434,10 @@
               <div class="sheet" data-reveal><div class="sheet__head">${t('song.sheet')}</div><dl>
                 ${row('artists', artistsLine(s), true)}
                 ${row('duration', s.duration)}${row('release', locked ? '' : fmtDate(s.release))}${row('genre', L(s.genre))}
-                ${FIELD_ORDER.map(k => row(k, val(s.meta[k]))).join('')}
+                ${FIELD_ORDER.map(k => row(k, val(s.meta[k]), true)).join('')}
               </dl></div>
               <div class="sheet" style="margin-top:16px" data-reveal><div class="sheet__head">${t('song.videoCredits')}</div><dl>
-                ${VIDEO_ORDER.map(k => row(k, val(s.video[k]))).join('')}
+                ${VIDEO_ORDER.map(k => row(k, val(s.video[k]), true)).join('')}
               </dl></div>
             </aside>
           </div>
@@ -592,13 +603,13 @@
   Pages.team = {
     title: () => `${t('team.title')} · APOLINARI EP`,
     render() {
-      const groups = ['label', 'visual', 'direction'];
+      const groups = ['label', 'visual', 'direction', 'crew', 'guests'];
       return `<div class="wrap page-pad">
         <header class="page-hero">${crumbs([home(), { label: t('team.title') }])}${bigTitle(t('team.title'))}<p class="lead" data-reveal>${t('team.intro')}</p></header>
         <div class="team-groups section--tight" style="padding-top:clamp(40px,6vw,72px)">
           ${groups.map(g => `<section class="team-group"><h2 data-reveal>${t('team.groups.' + g)}</h2><div class="tbig">
             ${D.team.filter(m => m.group === g).map(m => `<a class="tcardp" href="${teamHref(m.id)}" data-reveal data-cursor="${t('seeProfile')}">
-              <span class="tcardp__img"><img src="${img(m.img)}" alt="${esc(m.name)}" loading="lazy"></span>
+              <span class="tcardp__img">${avatar(m, m.name)}</span>
               <div><h3>${esc(m.name)}</h3><p class="tm__role">${esc(L(m.role))}</p></div>
               <div class="row"><span class="link-u" style="font-size:.85rem">@${m.instagram}</span><span class="tm__arrow">${I.arrowUR}</span></div></a>`).join('')}
           </div></section>`).join('')}
@@ -615,12 +626,12 @@
       return `<div class="wrap page-pad">
         ${crumbs([home(), { label: t('team.title'), href: url('equipo.html') }, { label: m.name }])}
         <section class="person" style="padding-bottom:clamp(40px,6vw,80px);border-bottom:1px solid var(--line)">
-          <div class="person__img" data-reveal="fade"><img src="${img(m.img)}" alt="${esc(m.name)}">
+          <div class="person__img" data-reveal="fade">${avatar(m, m.name)}
           </div>
           <div>
             <p class="eyebrow" data-reveal>${esc(t('team.groups.' + m.group))}</p>
             <h1 class="page-title--elegant" style="text-transform:uppercase;margin:12px 0" data-split>${esc(m.name)}</h1>
-            <p class="lead" data-reveal>${esc(L(m.role))} — ${lang() === 'es' ? 'parte del equipo de producción de' : 'part of the production crew of'} <em class="f-italic">Apolinari</em>.</p>
+            ${m.bio ? `<p class="lead" data-reveal>${esc(L(m.bio))}</p>` : `<p class="lead" data-reveal>${esc(L(m.role))} — ${lang() === 'es' ? 'parte del equipo de producción de' : 'part of the production crew of'} <em class="f-italic">Apolinari</em>.</p>`}
             <div class="btn-row" style="margin-top:24px" data-reveal><a class="btn btn--primary" href="${ig(m.instagram)}" target="_blank" rel="noopener" data-magnetic>${I.instagram}@${m.instagram}</a></div>
           </div>
         </section>
@@ -630,7 +641,7 @@
               ${cr.length ? `<div class="mini-songs">${cr.map(c => `<a href="${songHref(c.s)}"><b>${c.s.n}</b><span>${esc(songTitle(c.s))}</span><small>${esc(c.role)}</small></a>`).join('')}</div>` : empty(t('team.creditsEmpty'))}
             </div>
             <aside><h2 class="block-title" data-reveal>${t('team.others')}</h2>
-              <div style="display:grid;gap:10px">${D.team.filter(x => x.id !== id).map(x => `<a class="tm" href="${teamHref(x.id)}" data-reveal><span class="tm__img" style="width:48px;height:48px"><img src="${img(x.img)}" alt="" loading="lazy"></span><span><span class="tm__name" style="font-size:1rem">${esc(x.name)}</span><span class="tm__role" style="display:block">${esc(L(x.role))}</span></span><span class="tm__arrow">${I.arrowUR}</span></a>`).join('')}</div>
+              <div style="display:grid;gap:10px">${D.team.filter(x => x.id !== id).map(x => `<a class="tm" href="${teamHref(x.id)}" data-reveal><span class="tm__img" style="width:48px;height:48px">${avatar(x)}</span><span><span class="tm__name" style="font-size:1rem">${esc(x.name)}</span><span class="tm__role" style="display:block">${esc(L(x.role))}</span></span><span class="tm__arrow">${I.arrowUR}</span></a>`).join('')}</div>
             </aside>
           </div>
         </section>
@@ -642,7 +653,7 @@
       const ring = `${m.name} · ${L(m.role)} · APOLINARI EP · `.toUpperCase();
       box.insertAdjacentHTML('beforeend', `<svg class="person__ring" viewBox="0 0 100 100" aria-hidden="true"><defs><path id="pr" d="M50,50 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs><text><textPath href="#pr">${esc(ring + ring)}</textPath></text></svg>`);
       box.style.overflow = 'visible';
-      $('img', box).style.borderRadius = '50%';
+      const pic = $('img', box); if (pic) pic.style.borderRadius = '50%';
     }
   };
 

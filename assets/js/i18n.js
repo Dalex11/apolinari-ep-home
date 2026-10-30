@@ -47,8 +47,8 @@ window.UI = {
       trivia: 'Curiosidades', triviaEmpty: 'Las curiosidades de este capítulo llegan pronto.',
       sheet: 'Ficha técnica', videoCredits: 'Créditos del video', inSeries: 'En La Serie', inSeriesText: 'Este capítulo hace parte de una historia continua.',
       player: 'Reproductor', fields: {
-        artists: 'Artistas', duration: 'Duración', release: 'Estreno', genre: 'Género', composers: 'Compositores', producers: 'Productores', mixing: 'Mezcla', mastering: 'Master', bpm: 'BPM', key: 'Tonalidad', isrc: 'ISRC', label: 'Sello', recorded: 'Lugar de grabación',
-        director: 'Dirección', camera: 'Cámara', production: 'Producción', locations: 'Locaciones'
+        artists: 'Artistas', duration: 'Duración', release: 'Estreno', genre: 'Género', composers: 'Compositores', producers: 'Productores', mixing: 'Mezcla', mastering: 'Master', label: 'Sello', recorded: 'Lugar de grabación',
+        director: 'Dirección', visual: 'Producción visual', music: 'Producción musical', lights: 'Luces y asistencia de producción', locations: 'Locación'
       },
       allSongs: 'Todas las canciones', lockedText: 'Este capítulo aún no se ha estrenado. Vuelve cuando termine la cuenta regresiva.'
     },
@@ -57,7 +57,7 @@ window.UI = {
       summaryEmpty: 'Resumen del capítulo próximamente.', watchAll: 'Ver todos en YouTube', progress: 'capítulos estrenados'
     },
     artists: { title: 'Artistas', intro: 'East Coast y Error 404: dos formas de narrar Cali, un mismo proyecto.', realName: 'Nombre', born: 'Nacimiento', city: 'Ciudad', role: 'Rol', bio: 'Biografía', story: 'Historia', influences: 'Influencias', music: 'Su música en Spotify', inApolinari: 'En Apolinari', achievements: 'Logros y prensa', achievementsEmpty: 'Próximamente compartiremos shows, premios y prensa.', other: 'Conoce también a', instagram: 'Instagram' },
-    team: { title: 'Equipo', intro: 'Las personas y casas creativas que hicieron posible Apolinari.', groups: { label: 'Sello', visual: 'Producción visual', direction: 'Dirección' }, credits: 'Créditos en Apolinari', creditsEmpty: 'Los créditos por canción se publicarán muy pronto.', others: 'Resto del equipo' },
+    team: { title: 'Equipo', intro: 'Las personas y casas creativas que hicieron posible Apolinari.', groups: { label: 'Sello', visual: 'Producción visual', direction: 'Dirección', crew: 'Luces y asistencia', guests: 'Artistas invitados' }, credits: 'Créditos en Apolinari', creditsEmpty: 'Los créditos por canción se publicarán muy pronto.', others: 'Resto del equipo' },
     press: {
       title: 'Prensa y booking', intro: 'Todo lo que necesitas para escribir sobre Apolinari o llevarlo a tu escenario.',
       kit: 'Kit de prensa', kitText: 'Dossier oficial del EP en PDF: concepto, tracklist, artistas y equipo.', photos: 'Fotos oficiales', photosText: 'Portada, pájaro sin fondo, retratos y registro fotográfico en alta.',
@@ -130,8 +130,8 @@ window.UI = {
       trivia: 'Fun facts', triviaEmpty: 'Fun facts about this chapter are coming soon.',
       sheet: 'Song details', videoCredits: 'Video credits', inSeries: 'In The Series', inSeriesText: 'This chapter is part of a continuous story.',
       player: 'Player', fields: {
-        artists: 'Artists', duration: 'Length', release: 'Release', genre: 'Genre', composers: 'Songwriters', producers: 'Producers', mixing: 'Mixing', mastering: 'Mastering', bpm: 'BPM', key: 'Key', isrc: 'ISRC', label: 'Label', recorded: 'Recorded at',
-        director: 'Director', camera: 'Camera', production: 'Production', locations: 'Locations'
+        artists: 'Artists', duration: 'Length', release: 'Release', genre: 'Genre', composers: 'Songwriters', producers: 'Producers', mixing: 'Mixing', mastering: 'Mastering', label: 'Label', recorded: 'Recorded at',
+        director: 'Director', visual: 'Visual production', music: 'Music production', lights: 'Lights & production assistants', locations: 'Location'
       },
       allSongs: 'All songs', lockedText: 'This chapter hasn’t been released yet. Come back when the countdown ends.'
     },
@@ -140,7 +140,7 @@ window.UI = {
       summaryEmpty: 'Chapter summary coming soon.', watchAll: 'Watch all on YouTube', progress: 'chapters released'
     },
     artists: { title: 'Artists', intro: 'East Coast and Error 404: two ways of telling Cali, one project.', realName: 'Name', born: 'Born', city: 'City', role: 'Role', bio: 'Biography', story: 'Story', influences: 'Influences', music: 'Their music on Spotify', inApolinari: 'On Apolinari', achievements: 'Achievements & press', achievementsEmpty: 'Shows, awards and press coming soon.', other: 'Also meet', instagram: 'Instagram' },
-    team: { title: 'Crew', intro: 'The people and creative houses that made Apolinari possible.', groups: { label: 'Label', visual: 'Visual production', direction: 'Direction' }, credits: 'Credits on Apolinari', creditsEmpty: 'Per-song credits will be published very soon.', others: 'Rest of the crew' },
+    team: { title: 'Crew', intro: 'The people and creative houses that made Apolinari possible.', groups: { label: 'Label', visual: 'Visual production', direction: 'Direction', crew: 'Lights & assistants', guests: 'Featured artists' }, credits: 'Credits on Apolinari', creditsEmpty: 'Per-song credits will be published very soon.', others: 'Rest of the crew' },
     press: {
       title: 'Press & booking', intro: 'Everything you need to write about Apolinari or bring it to your stage.',
       kit: 'Press kit', kitText: 'Official EP dossier (PDF, in Spanish): concept, tracklist, artists and crew.', photos: 'Official photos', photosText: 'Cover art, transparent bird, portraits and behind-the-scenes in high resolution.',

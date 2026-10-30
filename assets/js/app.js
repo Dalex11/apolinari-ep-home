@@ -221,7 +221,7 @@
   }
   function mmenuHTML() {
     return `<ol>${NAV.map((n, i) => `<li><a href="${url(n.href)}" style="transition-delay:${.15 + i * .05}s" ${SECTION === n.key ? 'aria-current="page"' : ''}><small>0${i + 1}</small>${t('nav.' + n.key)}</a></li>`).join('')}</ol>
-      <div class="mmenu__foot"><span class="f-italic">${esc(L(D.site.quote))}</span><a href="mailto:${D.site.email}">${D.site.email}</a></div>`;
+      <div class="mmenu__foot"><span class="f-italic">${esc(L(D.site.quote))}</span><button class="mmenu__theme" data-action="theme">${I.sun}${state.lang === 'es' ? 'Cambiar tema' : 'Switch theme'}</button><a href="mailto:${D.site.email}">${D.site.email}</a></div>`;
   }
   function updateSoundBtn() {
     $$('.sound-btn').forEach(b => {

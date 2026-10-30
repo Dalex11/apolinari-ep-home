@@ -11,7 +11,7 @@ const PRODUCERS = ['Error 404', 'East Coast', 'Calipsis Music', 'Ospina Records'
 const videoCredits = locations => ({
   director: 'Camilo Medina',
   visual: ['Calipsis Music', 'Ospina Records'],
-  music: 'Brooklyn Records',
+  studio: 'Brooklyn Records',
   lights: ['Juan Valens', 'Sebastián González'],
   locations
 });
@@ -21,7 +21,8 @@ const CREW = [
   { who: 'ospina-records', role: { es: 'Producción y producción visual', en: 'Production & visual production' } },
   { who: 'camilo-medina', role: { es: 'Dirección del video', en: 'Video director' } },
   { who: 'juan-valens', role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' } },
-  { who: 'sebastian-gonzalez', role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' } }
+  { who: 'sebastian-gonzalez', role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' } },
+  { who: 'macroviajes', role: { es: 'Patrocinador', en: 'Sponsor' } }
 ];
 
 window.APOLINARI = {
@@ -154,11 +155,11 @@ window.APOLINARI = {
         en: 'Filling the void. He tries to fill the hole with many people at once. He flirts with all of them, commits to none and, without realizing it, ends up hurting several.'
       },
       trivia: [
-        { es: 'El video se grabó en Macroviajes, que además fue patrocinador del video.', en: 'The video was shot at Macroviajes, which also sponsored it.' },
+        { es: 'El video se grabó en Macroviajes, patrocinador de todo el proyecto Apolinari.', en: 'The video was shot at Macroviajes, sponsor of the whole Apolinari project.' },
         { es: 'Santi Jara cambió el coro original para darle más fuerza y hacerlo más pegajoso.', en: 'Santi Jara rewrote the original chorus to give it more punch and make it catchier.' }
       ],
       meta: { composers: ['Error 404', 'East Coast'], producers: PRODUCERS, mixing: 'East Coast', mastering: 'East Coast', label: 'MG Music', recorded: 'Cali, Valle del Cauca' },
-      video: videoCredits('Macroviajes · Cali, Valle del Cauca'),
+      video: videoCredits(['Macroviajes', 'Cali, Valle del Cauca']),
       credits: CREW.concat({ who: 'santi-jara', role: { es: 'Artista invitado', en: 'Featured artist' } })
     },
     {
@@ -224,7 +225,7 @@ window.APOLINARI = {
       spotify: '', spotifyId: '', apple: '', youtube: '', youtubeId: '',
       story: { es: '', en: '' }, seriesSummary: { es: '', en: '' }, trivia: [],
       meta: { composers: '', producers: '', mixing: '', mastering: '', label: 'MG Music', recorded: '' },
-      video: { director: '', visual: '', music: '', lights: '', locations: '' },
+      video: { director: '', visual: '', studio: '', lights: '', locations: '' },
       credits: []
     },
     {
@@ -237,7 +238,7 @@ window.APOLINARI = {
       spotify: '', spotifyId: '', apple: '', youtube: '', youtubeId: '',
       story: { es: '', en: '' }, seriesSummary: { es: '', en: '' }, trivia: [],
       meta: { composers: '', producers: '', mixing: '', mastering: '', label: 'MG Music', recorded: '' },
-      video: { director: '', visual: '', music: '', lights: '', locations: '' },
+      video: { director: '', visual: '', studio: '', lights: '', locations: '' },
       credits: []
     }
   ],
@@ -278,8 +279,7 @@ window.APOLINARI = {
           'Despite growing up with financial limitations, in a highly vulnerable neighborhood and without direct family support for his music career, he found in music a space for expression, discipline and purpose. His story is one of perseverance: an artist who has built his path out of personal conviction.',
           'Today East Coast sees himself as a passionate creator who doesn’t just produce music but lives it as a way of turning experiences into sound, aiming to build a free and authentic career in the industry.'
         ]
-      },
-      achievements: [] /* { es:'', en:'' } — se llenarán luego */
+      }
     },
     'error-404': {
       id: 'error-404',
@@ -312,10 +312,27 @@ window.APOLINARI = {
           'Born in the El Vallado neighborhood and raised between Chiminangos and Floralia, his artistic identity is deeply tied to his social and cultural context. A systems engineer from Universidad del Valle, his artist name is a conceptual play on words: a nod to the “404” computer error and to the idea of creating a sound nobody had found before in the scene.',
           'He came to music at an early age, encouraged by community spaces and his family, training in guitar and songwriting. His influences come mainly from the richness of Colombian folk music — cumbia, vals and pasillo are part of his everyday soundscape.'
         ]
-      },
-      achievements: []
+      }
     }
   },
+
+  /* Prensa: aplica a East Coast y Error 404 (siempre van juntos).
+     Se muestra en las dos páginas de artista y en Prensa. Más reciente primero.
+     url y date son opcionales. */
+  press: [
+    { outlet: 'The Rous Show · Canal CaliTV', handle: 'therousshowtv', date: '2026-04-09',
+      kind: { es: 'Entrevista en TV', en: 'TV interview' },
+      url: 'https://www.instagram.com/p/DW6yZ2HgcqT/',
+      text: { es: 'Entrevista sobre el camino que venimos construyendo con pasión, disciplina y flow: los sueños se trabajan todos los días.', en: 'An interview about the path we’ve been building with passion, discipline and flow: dreams are worked on every day.' },
+      note: { es: 'Dato curioso: en la publicación nos presentan como “el dúo East Coast”. Fue una confusión que nos dio mucha risa y hoy la guardamos como anécdota.', en: 'Fun fact: the post introduces us as “the duo East Coast”. It was a mix-up that made us laugh a lot, and now it’s one of our favorite anecdotes.' } },
+    { outlet: 'Oriente Estéreo 96.0 FM · Cali', date: '2026-03-05',
+      kind: { es: 'Entrevista en radio', en: 'Radio interview' },
+      text: { es: 'Entrevista en vivo en la emisora caleña.', en: 'Live interview on the Cali radio station.' } },
+    { outlet: 'Entérate Cali', handle: 'enteratecali', date: '2026-03-02',
+      kind: { es: 'Nota de prensa', en: 'Press feature' },
+      url: 'https://www.instagram.com/p/DVY98fZEc74/',
+      text: { es: 'Nota sobre el estreno de “No debiste amarme”, el capítulo 1: una cumbia con reggaetón que habla de las etapas del duelo tras una ruptura, con un ritmo para bailar. Ya sumaba unas 13.000 reproducciones.', en: 'A feature on the release of “No debiste amarme”, chapter 1: cumbia meets reggaetón in a song about the stages of grief after a breakup, set to a danceable beat. It had already reached about 13,000 streams.' } }
+  ],
 
   /* --------------------------------------------------------------------- */
   team: [
@@ -343,8 +360,19 @@ window.APOLINARI = {
       bio: {
         es: 'Artista puertorriqueño de música urbana. Su participación en Mariangela convirtió la canción en la primera colaboración internacional de Apolinari.',
         en: 'A Puerto Rican urban music artist. His feature on Mariangela made it Apolinari’s first international collaboration.'
+      } },
+    /* Patrocinadores ('instagram' es opcional) */
+    { id: 'macroviajes', name: 'Macroviajes', type: 'logo', group: 'sponsors',
+      role: { es: 'Patrocinador oficial', en: 'Official sponsor' }, instagram: 'macroviajes.turismo', img: 'team/macroviajes',
+      bio: {
+        es: 'Agencia de viajes de Cali y patrocinador de todo el proyecto Apolinari. Además, el video de Frontera y humo se grabó en sus instalaciones.',
+        en: 'A travel agency from Cali and sponsor of the whole Apolinari project. The Frontera y humo music video was also shot at its offices.'
       } }
   ],
+
+  /* Fotos de shows en vivo */
+  liveEvent: { name: 'Borondo', place: 'Vallegrande, Cali', date: '2026-10-08' },
+  live: ['en-vivo-1', 'en-vivo-6', 'en-vivo-4', 'en-vivo-2', 'en-vivo-7', 'en-vivo-5', 'en-vivo-3', 'en-vivo-8'],
 
   /* Registro fotográfico (galería) */
   gallery: [

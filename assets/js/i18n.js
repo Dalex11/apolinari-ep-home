@@ -33,7 +33,7 @@ window.UI = {
       galleryTitle: 'Registro fotográfico', gallerySub: 'Detrás de cámaras del rodaje de la serie.',
       seriesTitle: 'La Serie', seriesText: 'Cada lanzamiento llega con un video. Juntos forman una historia continua, capítulo a capítulo.',
       teamTitle: 'Equipo de producción',
-      showsTitle: 'Shows y merch', showsText: 'Estamos preparando fechas en vivo y mercancía oficial. Lo anunciaremos aquí y en redes.',
+      showsTitle: 'Próximos shows y merch', showsText: 'Estamos preparando nuevas fechas en vivo y mercancía oficial. Lo anunciaremos aquí y en redes.',
       followIg: 'Seguir en Instagram'
     },
     songs: {
@@ -48,7 +48,7 @@ window.UI = {
       sheet: 'Ficha técnica', videoCredits: 'Créditos del video', inSeries: 'En La Serie', inSeriesText: 'Este capítulo hace parte de una historia continua.',
       player: 'Reproductor', fields: {
         artists: 'Artistas', duration: 'Duración', release: 'Estreno', genre: 'Género', composers: 'Compositores', producers: 'Productores', mixing: 'Mezcla', mastering: 'Master', label: 'Sello', recorded: 'Lugar de grabación',
-        director: 'Dirección', visual: 'Producción visual', music: 'Producción musical', lights: 'Luces y asistencia de producción', locations: 'Locación'
+        director: 'Dirección', visual: 'Producción visual', studio: 'Estudio de grabación', lights: 'Luces y asistencia de producción', locations: 'Locación'
       },
       allSongs: 'Todas las canciones', lockedText: 'Este capítulo aún no se ha estrenado. Vuelve cuando termine la cuenta regresiva.'
     },
@@ -57,14 +57,16 @@ window.UI = {
       summaryEmpty: 'Resumen del capítulo próximamente.', watchAll: 'Ver todos en YouTube', progress: 'capítulos estrenados'
     },
     artists: { title: 'Artistas', intro: 'East Coast y Error 404: dos formas de narrar Cali, un mismo proyecto.', realName: 'Nombre', born: 'Nacimiento', city: 'Ciudad', role: 'Rol', bio: 'Biografía', story: 'Historia', influences: 'Influencias', music: 'Su música en Spotify', inApolinari: 'En Apolinari', achievements: 'Logros y prensa', achievementsEmpty: 'Próximamente compartiremos shows, premios y prensa.', other: 'Conoce también a', instagram: 'Instagram' },
-    team: { title: 'Equipo', intro: 'Las personas y casas creativas que hicieron posible Apolinari.', groups: { label: 'Sello', visual: 'Producción visual', direction: 'Dirección', crew: 'Luces y asistencia', guests: 'Artistas invitados' }, credits: 'Créditos en Apolinari', creditsEmpty: 'Los créditos por canción se publicarán muy pronto.', others: 'Resto del equipo' },
+    team: { title: 'Equipo', intro: 'Las personas y casas creativas que hicieron posible Apolinari.', groups: { label: 'Sello', visual: 'Producción visual', direction: 'Dirección', crew: 'Luces y asistencia', guests: 'Artistas invitados', sponsors: 'Patrocinadores' }, credits: 'Créditos en Apolinari', creditsEmpty: 'Los créditos por canción se publicarán muy pronto.', others: 'Resto del equipo' },
     press: {
       title: 'Prensa y booking', intro: 'Todo lo que necesitas para escribir sobre Apolinari o llevarlo a tu escenario.',
       kit: 'Kit de prensa', kitText: 'Dossier oficial del EP en PDF: concepto, tracklist, artistas y equipo.', photos: 'Fotos oficiales', photosText: 'Portada, pájaro sin fondo, retratos y registro fotográfico en alta.',
       download: 'Descargar', booking: 'Booking y contacto', bookingText: 'Para shows, entrevistas, colaboraciones o prensa, escríbenos. Respondemos por correo.', writeUs: 'Escribir correo', subject: 'Booking · Apolinari EP',
       shortBio: 'Bio corta', copyBio: 'Copiar bio', bioCopied: 'Bio copiada',
+      media: 'En los medios', view: 'Ver publicación', onAir: 'Emitida en vivo',
       bioText: 'Apolinari es el EP de East Coast x Error 404, dos artistas y productores de Cali, Colombia. Siete capítulos que fusionan reggaetón, cumbia, currulao, R&B y rock con sonidos del folclor colombiano, lanzados uno por mes con una serie audiovisual continua. ℗ MG Music.'
     },
+    live: { title: 'En vivo', sub: 'Así se vive Apolinari en tarima.', alt: 'East Coast x Error 404 en vivo, foto' },
     help: { title: 'Ayuda', intro: 'Respuestas rápidas a lo que más nos preguntan.', search: 'Buscar en la ayuda…', empty: 'No hay resultados para “{q}”. Prueba con otra palabra o escríbenos.', still: '¿No encontraste tu respuesta?', contact: 'Escríbenos al correo' },
     legal: { owner: 'Propietario del sitio', notice: 'Aviso legal', privacy: 'Tratamiento de datos', terms: 'Términos y condiciones', cookies: 'Política de cookies', cookieSettings: 'Configurar cookies', updated: 'Última actualización', esOnly: '' },
     footer: { explore: 'Explorar', music: 'Música', social: 'Redes', legal: 'Legal', made: 'Hecho en Cali, Colombia', rights: 'Todos los derechos reservados.', top: 'Volver arriba', owner: 'Sitio administrado por' },
@@ -116,7 +118,7 @@ window.UI = {
       galleryTitle: 'Behind the scenes', gallerySub: 'Photos from the series shoot.',
       seriesTitle: 'The Series', seriesText: 'Every release comes with a music video. Together they tell one continuous story, chapter by chapter.',
       teamTitle: 'Production crew',
-      showsTitle: 'Shows & merch', showsText: 'Live dates and official merch are on the way. We’ll announce them here and on social media.',
+      showsTitle: 'Upcoming shows & merch', showsText: 'New live dates and official merch are on the way. We’ll announce them here and on social media.',
       followIg: 'Follow on Instagram'
     },
     songs: {
@@ -131,7 +133,7 @@ window.UI = {
       sheet: 'Song details', videoCredits: 'Video credits', inSeries: 'In The Series', inSeriesText: 'This chapter is part of a continuous story.',
       player: 'Player', fields: {
         artists: 'Artists', duration: 'Length', release: 'Release', genre: 'Genre', composers: 'Songwriters', producers: 'Producers', mixing: 'Mixing', mastering: 'Mastering', label: 'Label', recorded: 'Recorded at',
-        director: 'Director', visual: 'Visual production', music: 'Music production', lights: 'Lights & production assistants', locations: 'Location'
+        director: 'Director', visual: 'Visual production', studio: 'Recording studio', lights: 'Lights & production assistants', locations: 'Location'
       },
       allSongs: 'All songs', lockedText: 'This chapter hasn’t been released yet. Come back when the countdown ends.'
     },
@@ -140,14 +142,16 @@ window.UI = {
       summaryEmpty: 'Chapter summary coming soon.', watchAll: 'Watch all on YouTube', progress: 'chapters released'
     },
     artists: { title: 'Artists', intro: 'East Coast and Error 404: two ways of telling Cali, one project.', realName: 'Name', born: 'Born', city: 'City', role: 'Role', bio: 'Biography', story: 'Story', influences: 'Influences', music: 'Their music on Spotify', inApolinari: 'On Apolinari', achievements: 'Achievements & press', achievementsEmpty: 'Shows, awards and press coming soon.', other: 'Also meet', instagram: 'Instagram' },
-    team: { title: 'Crew', intro: 'The people and creative houses that made Apolinari possible.', groups: { label: 'Label', visual: 'Visual production', direction: 'Direction', crew: 'Lights & assistants', guests: 'Featured artists' }, credits: 'Credits on Apolinari', creditsEmpty: 'Per-song credits will be published very soon.', others: 'Rest of the crew' },
+    team: { title: 'Crew', intro: 'The people and creative houses that made Apolinari possible.', groups: { label: 'Label', visual: 'Visual production', direction: 'Direction', crew: 'Lights & assistants', guests: 'Featured artists', sponsors: 'Sponsors' }, credits: 'Credits on Apolinari', creditsEmpty: 'Per-song credits will be published very soon.', others: 'Rest of the crew' },
     press: {
       title: 'Press & booking', intro: 'Everything you need to write about Apolinari or bring it to your stage.',
       kit: 'Press kit', kitText: 'Official EP dossier (PDF, in Spanish): concept, tracklist, artists and crew.', photos: 'Official photos', photosText: 'Cover art, transparent bird, portraits and behind-the-scenes in high resolution.',
       download: 'Download', booking: 'Booking & contact', bookingText: 'For shows, interviews, collaborations or press, write to us. We reply by email.', writeUs: 'Send an email', subject: 'Booking · Apolinari EP',
       shortBio: 'Short bio', copyBio: 'Copy bio', bioCopied: 'Bio copied',
+      media: 'In the media', view: 'View post', onAir: 'Aired live',
       bioText: 'Apolinari is the EP by East Coast x Error 404, two artists and producers from Cali, Colombia. Seven chapters fusing reggaetón, cumbia, currulao, R&B and rock with Colombian folk sounds, released one per month alongside a continuous music video series. ℗ MG Music.'
     },
+    live: { title: 'Live', sub: 'This is what Apolinari feels like on stage.', alt: 'East Coast x Error 404 live, photo' },
     help: { title: 'Help', intro: 'Quick answers to what people ask us the most.', search: 'Search help…', empty: 'No results for “{q}”. Try another word or write to us.', still: 'Didn’t find your answer?', contact: 'Email us' },
     legal: { owner: 'Site owner', notice: 'Legal notice', privacy: 'Data protection', terms: 'Terms & conditions', cookies: 'Cookie policy', cookieSettings: 'Cookie settings', updated: 'Last updated', esOnly: 'This legal text is published in Spanish, which is the legally binding version under Colombian law. Below is a short English summary.' },
     footer: { explore: 'Explore', music: 'Music', social: 'Social', legal: 'Legal', made: 'Made in Cali, Colombia', rights: 'All rights reserved.', top: 'Back to top', owner: 'Site run by' },

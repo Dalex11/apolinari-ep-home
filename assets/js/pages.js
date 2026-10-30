@@ -36,6 +36,22 @@
       <a class="icon-btn platform platform--apple" href="${s.apple}" target="_blank" rel="noopener" aria-label="${t('listenOn')} Apple Music: ${esc(songTitle(s))}" title="Apple Music">${I.apple}</a>
       <a class="icon-btn platform platform--youtube" href="${s.youtube}" target="_blank" rel="noopener" aria-label="${t('watch')}: ${esc(songTitle(s))}" title="YouTube">${I.youtube}</a>` : '';
   const empty = msg => `<div class="empty">${I.feather}<p>${esc(msg)}</p></div>`;
+  // Fotos de shows en vivo (galería con visor)
+  const livePhotos = (cls, inPage) => !(D.live || []).length ? '' : `<section class="${cls}" aria-labelledby="lv-t">
+      ${inPage ? '' : '<div class="wrap">'}
+        <div class="section-head"><h2 class="${inPage ? 'block-title' : 'section-title--elegant'}" id="lv-t" ${inPage ? 'data-reveal' : 'data-split'}>${t('live.title')}</h2><p class="lead" data-reveal style="max-width:38ch">${t('live.sub')}${D.liveEvent ? `<br><span class="eyebrow">${esc(D.liveEvent.name)} · ${esc(D.liveEvent.place)} · ${esc(fmtDate(D.liveEvent.date))}</span>` : ''}</p></div>
+        <div class="gallery gallery--live">${D.live.map((g, i) => `<a class="gallery__item" href="${img(g)}" data-gallery="live" data-reveal data-cursor="${lang() === 'es' ? 'Ver' : 'View'}"><img src="${img(g, true)}" alt="${esc(t('live.alt'))} ${i + 1}" loading="lazy"></a>`).join('')}</div>
+      ${inPage ? '' : '</div>'}
+    </section>`;
+  // Notas de prensa y entrevistas (compartidas por East Coast y Error 404)
+  const pressList = () => !(D.press || []).length ? empty(t('artists.achievementsEmpty')) : `<ol class="presslist">${D.press.map(p => `
+      <li class="presslist__item" data-reveal>
+        <p class="eyebrow">${esc(L(p.kind))}${p.date ? ` · ${esc(fmtDate(p.date))}` : ''}</p>
+        <h3>${esc(p.outlet)}</h3>
+        <p>${esc(L(p.text))}</p>
+        ${p.note ? `<p class="presslist__note">${esc(L(p.note))}</p>` : ''}
+        ${p.url ? `<a class="link-u presslist__link" href="${p.url}" target="_blank" rel="noopener">${I.instagram}${t('press.view')}${p.handle ? ` · @${esc(p.handle)}` : ''}${I.arrowUR}</a>` : `<span class="presslist__link presslist__link--off">${t('press.onAir')}</span>`}
+      </li>`).join('')}</ol>`;
   const nextUp = () => D.songs.find(s => s.countdown && new Date(s.countdown) > new Date());
   const released = () => D.songs.filter(s => s.spotify);
   const bigTitle = (txt, cls = 'page-title') => `<h1 class="${cls}" data-split>${esc(txt)}</h1>`;
@@ -180,6 +196,8 @@
           <div class="team-grid">${D.team.filter(m => m.group !== 'guests').map(m => `<a class="tm" href="${teamHref(m.id)}" data-reveal><span class="tm__img">${avatar(m)}</span><span><span class="tm__name">${esc(m.name)}</span><span class="tm__role" style="display:block">${esc(L(m.role))}</span></span><span class="tm__arrow">${I.arrowUR}</span></a>`).join('')}</div>
         </div>
       </section>
+
+      ${livePhotos('section section--tight')}
 
       <section class="section section--tight">
         <div class="wrap"><div class="soon" data-reveal><div><p class="eyebrow">${t('upcoming')}</p><h3>${t('home.showsTitle')}</h3><p class="lead" style="margin-top:8px">${t('home.showsText')}</p></div>
@@ -376,7 +394,7 @@
      CANCIÓN
      ======================================================================= */
   const FIELD_ORDER = ['composers', 'producers', 'mixing', 'mastering', 'label', 'recorded'];
-  const VIDEO_ORDER = ['director', 'visual', 'music', 'lights', 'locations'];
+  const VIDEO_ORDER = ['director', 'visual', 'studio', 'lights', 'locations'];
   // Devuelve HTML: los nombres conocidos quedan enlazados a su página
   const val = v => Array.isArray(v) ? v.map(linkName).join(', ') : (v && typeof v === 'object' ? esc(L(v)) : v ? linkName(v) : '');
   const row = (k, v, raw) => `<div><dt>${t('song.fields.' + k)}</dt><dd class="${v ? '' : 'tbd'}">${v ? (raw ? v : esc(v)) : t('tbd')}</dd></div>`;
@@ -540,7 +558,6 @@
       const a = D.artists[id]; if (!a) return Pages.notfound.render();
       const other = Object.values(D.artists).find(x => x.id !== id);
       const songs = D.songs.filter(s => s.artists.includes(id));
-      const ach = (a.achievements || []).map(L).filter(Boolean);
       return `<div class="wrap page-pad">
         ${crumbs([home(), { label: t('artists.title'), href: url('artistas.html') }, { label: a.name }])}
         <header class="artist-hero">
@@ -562,7 +579,7 @@
               <h2 class="block-title" style="margin-top:clamp(40px,6vw,72px)" data-reveal>${t('artists.story')}</h2>
               <div class="prose" data-reveal>${L(a.story).map(p => `<p>${esc(p)}</p>`).join('')}</div>
               <h2 class="block-title" style="margin-top:clamp(40px,6vw,72px)" data-reveal>${t('artists.achievements')}</h2>
-              ${ach.length ? `<ol class="facts">${ach.map(x => `<li class="fact" data-reveal>${esc(x)}</li>`).join('')}</ol>` : empty(t('artists.achievementsEmpty'))}
+              ${pressList()}
             </div>
             <aside style="display:grid;gap:20px">
               <dl class="datacard" data-reveal>
@@ -603,7 +620,7 @@
   Pages.team = {
     title: () => `${t('team.title')} · APOLINARI EP`,
     render() {
-      const groups = ['label', 'visual', 'direction', 'crew', 'guests'];
+      const groups = ['label', 'visual', 'direction', 'crew', 'guests', 'sponsors'];
       return `<div class="wrap page-pad">
         <header class="page-hero">${crumbs([home(), { label: t('team.title') }])}${bigTitle(t('team.title'))}<p class="lead" data-reveal>${t('team.intro')}</p></header>
         <div class="team-groups section--tight" style="padding-top:clamp(40px,6vw,72px)">
@@ -611,7 +628,7 @@
             ${D.team.filter(m => m.group === g).map(m => `<a class="tcardp" href="${teamHref(m.id)}" data-reveal data-cursor="${t('seeProfile')}">
               <span class="tcardp__img">${avatar(m, m.name)}</span>
               <div><h3>${esc(m.name)}</h3><p class="tm__role">${esc(L(m.role))}</p></div>
-              <div class="row"><span class="link-u" style="font-size:.85rem">@${m.instagram}</span><span class="tm__arrow">${I.arrowUR}</span></div></a>`).join('')}
+              <div class="row">${m.instagram ? `<span class="link-u" style="font-size:.85rem">@${m.instagram}</span>` : '<span></span>'}<span class="tm__arrow">${I.arrowUR}</span></div></a>`).join('')}
           </div></section>`).join('')}
         </div>
       </div>`;
@@ -632,7 +649,7 @@
             <p class="eyebrow" data-reveal>${esc(t('team.groups.' + m.group))}</p>
             <h1 class="page-title--elegant" style="text-transform:uppercase;margin:12px 0" data-split>${esc(m.name)}</h1>
             ${m.bio ? `<p class="lead" data-reveal>${esc(L(m.bio))}</p>` : `<p class="lead" data-reveal>${esc(L(m.role))} — ${lang() === 'es' ? 'parte del equipo de producción de' : 'part of the production crew of'} <em class="f-italic">Apolinari</em>.</p>`}
-            <div class="btn-row" style="margin-top:24px" data-reveal><a class="btn btn--primary" href="${ig(m.instagram)}" target="_blank" rel="noopener" data-magnetic>${I.instagram}@${m.instagram}</a></div>
+            ${m.instagram ? `<div class="btn-row" style="margin-top:24px" data-reveal><a class="btn btn--primary" href="${ig(m.instagram)}" target="_blank" rel="noopener" data-magnetic>${I.instagram}@${m.instagram}</a></div>` : ''}
           </div>
         </section>
         <section class="section--tight" style="padding-top:clamp(40px,6vw,72px)">
@@ -688,6 +705,8 @@
               </div></aside>
           </div>
         </section>
+        ${livePhotos('section--tight', true)}
+        <section class="section--tight"><h2 class="block-title" data-reveal>${t('press.media')}</h2>${pressList()}</section>
         <section class="section--tight"><div class="soon" data-reveal><div><p class="eyebrow">${t('upcoming')}</p><h3>${t('home.showsTitle')}</h3><p class="lead" style="margin-top:8px">${t('home.showsText')}</p></div></div></section>
       </div>`;
     }

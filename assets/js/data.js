@@ -343,7 +343,7 @@ window.APOLINARI = {
     { id: 'ospina-records', name: 'Ospina Records', type: 'logo', group: 'visual',
       role: { es: 'Producción visual', en: 'Visual production' }, instagram: 'ospinarecords_', img: 'team/ospina-records' },
     { id: 'camilo-medina', name: 'Camilo Medina', type: 'person', group: 'direction',
-      role: { es: 'Dirección', en: 'Director' }, instagram: 'iamdelta_', img: 'team/camilo-medina' },
+      role: { es: 'Dirección', en: 'Director' }, instagram: 'medinavisuals__', img: 'team/camilo-medina' },
     { id: 'juan-valens', name: 'Juan Valens', type: 'person', group: 'crew',
       role: { es: 'Luces y asistencia de producción', en: 'Lights & production assistant' }, instagram: 'juan_valens', img: 'team/juan-valens' },
     { id: 'sebastian-gonzalez', name: 'Sebastián González', type: 'person', group: 'crew',

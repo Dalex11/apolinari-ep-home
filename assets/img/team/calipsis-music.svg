@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <title>Calipsis Music</title>
+  <defs>
+    <linearGradient id="chrome" gradientUnits="userSpaceOnUse" x1="250" y1="290" x2="760" y2="710">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".18" stop-color="#d4d4d4"/>
+      <stop offset=".36" stop-color="#5a5a5a"/>
+      <stop offset=".47" stop-color="#f7f7f7"/>
+      <stop offset=".6" stop-color="#767676"/>
+      <stop offset=".78" stop-color="#ececec"/>
+      <stop offset="1" stop-color="#3f3f3f"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".6"/>
+      <stop offset=".45" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="flare" cx="282" cy="560" r="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <g id="logo">
+      <!-- parte superior de la C -->
+      <path d="M392 330 Q402 292 445 290 L815 290 Q858 292 852 330 L812 452 Q808 464 795 464 L640 464 Q618 462 622 446 L652 344 L604 344 Q594 345 590 356 L552 486 Q548 498 535 499 L368 506 Q340 506 346 482 Z"/>
+      <!-- estrella y trazo -->
+      <path d="M104 578 Q205 560 262 528 Q305 495 338 424 Q336 485 345 500 Q370 520 420 518 L792 498 Q806 500 796 512 L560 542 Q420 562 340 590 Q300 605 285 622 Q245 660 216 712 Q228 655 232 620 Q222 595 190 588 Q150 582 104 578 Z"/>
+      <!-- parte inferior de la C -->
+      <path d="M300 642 Q300 618 330 612 Q360 604 500 576 L522 572 L504 634 L550 632 L568 563 L782 520 Q806 516 800 540 L770 640 Q760 676 722 684 Q690 690 655 690 L322 690 Q292 688 294 664 Z"/>
+    </g>
+  </defs>
+  <rect width="1000" height="1000" fill="#050505"/>
+  <g fill="url(#chrome)" stroke="url(#chrome)" stroke-width="8" stroke-linejoin="round"><use href="#logo"/></g>
+  <g fill="url(#shine)"><use href="#logo"/></g>
+  <g fill="none" stroke="#fff" stroke-opacity=".9" stroke-width="3" stroke-linejoin="round"><use href="#logo"/></g>
+  <circle cx="282" cy="560" r="70" fill="url(#flare)" opacity=".7"/>
+</svg>
